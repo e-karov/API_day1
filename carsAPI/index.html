@@ -26,28 +26,29 @@
             request.onload = function(){
                 if (this.status == 200) {
                     const carsContainer = document.querySelector('#cars-container');
-                    const res = JSON.parse(this.responseText);
-                    let cars = res.data;
-                    let content;
+                    let response = JSON.parse(this.responseText);
+                    let cars = response.data;
                     cars.forEach(car => {
-                            content += 
+                        let card =document.createElement('div');
+                        card.innerHTML = 
                             `
                             <div class="card">
                                 <img src="${car.picture}" class="card-img-top" alt="${car.name}"">
                                 <div class="card-body">
                                     <h5 class="card-title">${car.name}</h5>
-                                    <p class="card-text"><h5>Price:</h5>${car.price}</p>
+                                    <p class="card-text"><h5>Price:</h5>${car.price} $</p>
                                 </div>
                             </div>
                             `;
+                        carsContainer.appendChild(card);
                     });
-                    carsContainer.innerHTML = content;
                 }
             }
             request.open("GET", "webservice.php");
             request.send();
-        }
 
+
+        }
         showCars();
 
     </script>
