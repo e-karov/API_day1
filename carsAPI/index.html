@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title style="color:bisque ;">Cars</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
         <div class="container">
           <a class="navbar-brand" href="#">
               
-            <img src="https://w7.pngwing.com/pngs/529/189/png-transparent-computer-icons-navigation-bar-home-home-angle-building-text-thumbnail.png" alt="home.png" width="30" height="24"><h3 style="color:bisque ; display: inline; margin:1rem;">Cars</h3>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIb_iMwgIcEPSMqasAgYHJ4S8tiHwHjXRggUvyDUXY&s" alt="home.png" width="30" height="33" style="border-radius:50%;"><h3 style="color:bisque ; display: inline; margin:1rem;">Cars</h3>
           </a>
         </div>
       </nav>    
@@ -24,22 +25,22 @@
             const request = new XMLHttpRequest();
             request.onload = function(){
                 if (this.status == 200) {
-                    const data = JSON.parse(this.responseText);
-                    console.log(data);
                     const carsContainer = document.querySelector('#cars-container');
+                    const res = JSON.parse(this.responseText);
+                    let cars = res.data;
                     let content;
-                    for (const car in data) {
-                        content += `
-                        <div class="card" style="width: 18rem;">
-                        <img src="${car.picture}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${car.name}</h5>
-                            <p class="card-text"><h5>Price:</h5>${car.price}</p>
-                            // <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                        </div>
-                        `;
-                    }
+                    cars.forEach(car => {
+                            content += 
+                            `
+                            <div class="card">
+                                <img src="${car.picture}" class="card-img-top" alt="${car.name}"">
+                                <div class="card-body">
+                                    <h5 class="card-title">${car.name}</h5>
+                                    <p class="card-text"><h5>Price:</h5>${car.price}</p>
+                                </div>
+                            </div>
+                            `;
+                    });
                     carsContainer.innerHTML = content;
                 }
             }
