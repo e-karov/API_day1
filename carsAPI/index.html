@@ -27,16 +27,17 @@
                 if (this.status == 200) {
                     const carsContainer = document.querySelector('#cars-container');
                     let response = JSON.parse(this.responseText);
+                    console.log(response.data);
                     let cars = response.data;
                     cars.forEach(car => {
                         let card =document.createElement('div');
                         card.innerHTML = 
                             `
                             <div class="card">
-                                <img src="${car.picture}" class="card-img-top" alt="${car.name}"">
+                                <img src="${car[2]}" class="card-img-top" alt="${car[0]}"">
                                 <div class="card-body">
-                                    <h5 class="card-title">${car.name}</h5>
-                                    <p class="card-text"><h5>Price:</h5>${car.price} $</p>
+                                    <h5 class="card-title">${car[0]}</h5>
+                                    <p class="card-text"><h5>Price:</h5>${car[1]} $</p>
                                 </div>
                             </div>
                             `;
